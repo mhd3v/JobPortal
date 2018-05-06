@@ -35,5 +35,16 @@ namespace JobPortal {
             this.Close();
             mw.Show();
         }
+
+        private void ViewJobs_Click(object sender, RoutedEventArgs e) {
+
+            ViewJobs vj = new ViewJobs();
+
+            this.Close();
+            vj.Show();
+
+        }
+
+       
     }
 }

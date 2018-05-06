@@ -72,6 +72,9 @@
     <Compile Include="CandidateHome.xaml.cs">
       <DependentUpon>CandidateHome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CreateJobListing.xaml.cs">
+      <DependentUpon>CreateJobListing.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EmployerHome.xaml.cs">
       <DependentUpon>EmployerHome.xaml</DependentUpon>
     </Compile>
@@ -83,7 +86,14 @@
     <Compile Include="SignUp.xaml.cs">
       <DependentUpon>SignUp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewJobs.xaml.cs">
+      <DependentUpon>ViewJobs.xaml</DependentUpon>
+    </Compile>
     <Page Include="CandidateHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateJobListing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -104,6 +114,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="SignUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewJobs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

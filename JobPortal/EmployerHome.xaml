@@ -12,7 +12,7 @@
             <StackPanel Width="150" >
                 <Button Margin="0 30 0 0">View Messages</Button>
                 <Button Margin="0 20 0 0">View Applications</Button>
-                <Button Margin="0 20 0 0">Create Job Listing</Button>
+                <Button Margin="0 20 0 0" Name="CreateJobListing" Click="CreateJobListing_Click">Create Job Listing</Button>
                 <Button Margin="0 20 0 0" Width="50" Name="Logout" Click="Logout_Click">Logout</Button>
             </StackPanel>
 

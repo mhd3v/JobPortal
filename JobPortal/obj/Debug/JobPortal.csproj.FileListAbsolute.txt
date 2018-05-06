@@ -20,3 +20,7 @@ C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\obj\Deb
 C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\obj\Debug\EmployerHome.g.cs
 C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\obj\Debug\CandidateHome.baml
 C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\obj\Debug\CandidateHome.g.cs
+C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\obj\Debug\CreateJobListing.baml
+C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\obj\Debug\CreateJobListing.g.cs
+C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\obj\Debug\ViewJobs.baml
+C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\obj\Debug\ViewJobs.g.cs

@@ -33,6 +33,9 @@ namespace JobPortal
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
+    partial void InsertListing(Listing instance);
+    partial void UpdateListing(Listing instance);
+    partial void DeleteListing(Listing instance);
     #endregion
 		
 		public JPDataClassesDataContext() : 
@@ -72,6 +75,14 @@ namespace JobPortal
 				return this.GetTable<User>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Listing> Listings
+		{
+			get
+			{
+				return this.GetTable<Listing>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
@@ -87,6 +98,8 @@ namespace JobPortal
 		private string _UserName;
 		
 		private string _Password;
+		
+		private EntitySet<Listing> _Listings;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -104,6 +117,7 @@ namespace JobPortal
 		
 		public User()
 		{
+			this._Listings = new EntitySet<Listing>(new Action<Listing>(this.attach_Listings), new Action<Listing>(this.detach_Listings));
 			OnCreated();
 		}
 		
@@ -183,6 +197,326 @@ namespace JobPortal
 					this._Password = value;
 					this.SendPropertyChanged("Password");
 					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Listing", Storage="_Listings", ThisKey="UserId", OtherKey="UserId")]
+		public EntitySet<Listing> Listings
+		{
+			get
+			{
+				return this._Listings;
+			}
+			set
+			{
+				this._Listings.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Listings(Listing entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Listings(Listing entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Listing")]
+	public partial class Listing : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ListingId;
+		
+		private string _ListingDescription;
+		
+		private System.Nullable<System.DateTime> _ListedDate;
+		
+		private System.Nullable<double> _GpaRequirement;
+		
+		private System.Nullable<double> _ExperienceRequirement;
+		
+		private System.Nullable<int> _OpenToAll;
+		
+		private string _ListingTitle;
+		
+		private System.Nullable<double> _AgeRequirement;
+		
+		private int _UserId;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnListingIdChanging(int value);
+    partial void OnListingIdChanged();
+    partial void OnListingDescriptionChanging(string value);
+    partial void OnListingDescriptionChanged();
+    partial void OnListedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnListedDateChanged();
+    partial void OnGpaRequirementChanging(System.Nullable<double> value);
+    partial void OnGpaRequirementChanged();
+    partial void OnExperienceRequirementChanging(System.Nullable<double> value);
+    partial void OnExperienceRequirementChanged();
+    partial void OnOpenToAllChanging(System.Nullable<int> value);
+    partial void OnOpenToAllChanged();
+    partial void OnListingTitleChanging(string value);
+    partial void OnListingTitleChanged();
+    partial void OnAgeRequirementChanging(System.Nullable<double> value);
+    partial void OnAgeRequirementChanged();
+    partial void OnUserIdChanging(int value);
+    partial void OnUserIdChanged();
+    #endregion
+		
+		public Listing()
+		{
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListingId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ListingId
+		{
+			get
+			{
+				return this._ListingId;
+			}
+			set
+			{
+				if ((this._ListingId != value))
+				{
+					this.OnListingIdChanging(value);
+					this.SendPropertyChanging();
+					this._ListingId = value;
+					this.SendPropertyChanged("ListingId");
+					this.OnListingIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListingDescription", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string ListingDescription
+		{
+			get
+			{
+				return this._ListingDescription;
+			}
+			set
+			{
+				if ((this._ListingDescription != value))
+				{
+					this.OnListingDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._ListingDescription = value;
+					this.SendPropertyChanged("ListingDescription");
+					this.OnListingDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ListedDate
+		{
+			get
+			{
+				return this._ListedDate;
+			}
+			set
+			{
+				if ((this._ListedDate != value))
+				{
+					this.OnListedDateChanging(value);
+					this.SendPropertyChanging();
+					this._ListedDate = value;
+					this.SendPropertyChanged("ListedDate");
+					this.OnListedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GpaRequirement", DbType="Float")]
+		public System.Nullable<double> GpaRequirement
+		{
+			get
+			{
+				return this._GpaRequirement;
+			}
+			set
+			{
+				if ((this._GpaRequirement != value))
+				{
+					this.OnGpaRequirementChanging(value);
+					this.SendPropertyChanging();
+					this._GpaRequirement = value;
+					this.SendPropertyChanged("GpaRequirement");
+					this.OnGpaRequirementChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExperienceRequirement", DbType="Float")]
+		public System.Nullable<double> ExperienceRequirement
+		{
+			get
+			{
+				return this._ExperienceRequirement;
+			}
+			set
+			{
+				if ((this._ExperienceRequirement != value))
+				{
+					this.OnExperienceRequirementChanging(value);
+					this.SendPropertyChanging();
+					this._ExperienceRequirement = value;
+					this.SendPropertyChanged("ExperienceRequirement");
+					this.OnExperienceRequirementChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OpenToAll", DbType="Int")]
+		public System.Nullable<int> OpenToAll
+		{
+			get
+			{
+				return this._OpenToAll;
+			}
+			set
+			{
+				if ((this._OpenToAll != value))
+				{
+					this.OnOpenToAllChanging(value);
+					this.SendPropertyChanging();
+					this._OpenToAll = value;
+					this.SendPropertyChanged("OpenToAll");
+					this.OnOpenToAllChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListingTitle", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string ListingTitle
+		{
+			get
+			{
+				return this._ListingTitle;
+			}
+			set
+			{
+				if ((this._ListingTitle != value))
+				{
+					this.OnListingTitleChanging(value);
+					this.SendPropertyChanging();
+					this._ListingTitle = value;
+					this.SendPropertyChanged("ListingTitle");
+					this.OnListingTitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AgeRequirement", DbType="Float")]
+		public System.Nullable<double> AgeRequirement
+		{
+			get
+			{
+				return this._AgeRequirement;
+			}
+			set
+			{
+				if ((this._AgeRequirement != value))
+				{
+					this.OnAgeRequirementChanging(value);
+					this.SendPropertyChanging();
+					this._AgeRequirement = value;
+					this.SendPropertyChanged("AgeRequirement");
+					this.OnAgeRequirementChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="Int NOT NULL")]
+		public int UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Listing", Storage="_User", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Listings.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Listings.Add(this);
+						this._UserId = value.UserId;
+					}
+					else
+					{
+						this._UserId = default(int);
+					}
+					this.SendPropertyChanged("User");
 				}
 			}
 		}

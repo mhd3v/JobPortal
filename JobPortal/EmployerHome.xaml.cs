@@ -17,14 +17,18 @@ namespace JobPortal {
     /// Interaction logic for EmployerHome.xaml
     /// </summary>
     public partial class EmployerHome : Window {
+
+        User user;
+
         public EmployerHome() {
             InitializeComponent();
         }
         
-        public EmployerHome(User user) {
+        public EmployerHome(User u) {
             InitializeComponent();
 
-            WelcomeText.Text = "Welcome " + user.UserName;
+            user = u;
+            WelcomeText.Text = "Welcome " + u.UserName;
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e) {
@@ -33,6 +37,15 @@ namespace JobPortal {
 
             this.Close();
             mw.Show();
+
+        }
+
+        private void CreateJobListing_Click(object sender, RoutedEventArgs e) {
+
+            CreateJobListing joblisting = new CreateJobListing(user);
+
+            this.Close();
+            joblisting.Show();
 
         }
     }

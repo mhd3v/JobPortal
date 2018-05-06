@@ -25,9 +25,6 @@ namespace JobPortal {
 
         public SignUp() {
             InitializeComponent();
-
-            
-
         }
 
         private void CheckUserName(object sender, TextChangedEventArgs e) {
@@ -76,7 +73,11 @@ namespace JobPortal {
                     dc.Users.InsertOnSubmit(newUser);
                     dc.SubmitChanges();
 
-                    MessageBox.Show("Signup successful!");
+                    MainWindow mw = new MainWindow();
+
+                    this.Close();
+                    mw.Show();
+
                 }
 
                 else {
