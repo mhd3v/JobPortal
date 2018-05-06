@@ -40,16 +40,17 @@ namespace JobPortal {
 
         private void LoginClick_Click(object sender, RoutedEventArgs e) {
 
-            if (UserName.Text != "" && Password.ToString() != "") {
+            if (UserName.Text != "" && Password.Password.ToString() != "") {
 
-                var res = from r in dc.Users
-                          where r.UserName == UserName.Text && r.Password == Password.ToString()
-                          select r;
+                var res = (from r in dc.Users
+                          where r.UserName == UserName.Text && r.Password == Password.Password.ToString()
+                          select r).FirstOrDefault();
 
-                if (res != null) {
+                User user = (User) res;
 
-                    User user = (User)res;
+                if (user != null) {
 
+                   
                     if (user.UserType == "employer") {
 
                         EmployerHome eh = new EmployerHome(user);
@@ -61,12 +62,16 @@ namespace JobPortal {
 
                     else {
 
-                        //EmployerHome eh = new EmployerHome(user);
+                        CandidateHome ch = new CandidateHome(user);
 
-                        //this.Close();
-                        //eh.Show();
+                        this.Close();
+                        ch.Show();
                     }
 
+                }
+
+                else {
+                    MessageBox.Show("Incorrect username or password");
                 }
 
 
@@ -74,7 +79,7 @@ namespace JobPortal {
 
             else {
 
-                if (UserName.Text == "" && Password.ToString() != "")
+                if (UserName.Text == "" && Password.Password.ToString() != "")
                     MessageBox.Show("Enter username and password");
 
                 else if (UserName.Text == "")

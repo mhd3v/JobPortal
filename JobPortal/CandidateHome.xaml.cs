@@ -14,26 +14,26 @@ using System.Windows.Shapes;
 
 namespace JobPortal {
     /// <summary>
-    /// Interaction logic for EmployerHome.xaml
+    /// Interaction logic for CandidateHome.xaml
     /// </summary>
-    public partial class EmployerHome : Window {
-        public EmployerHome() {
+    public partial class CandidateHome : Window {
+        public CandidateHome() {
             InitializeComponent();
         }
-        
-        public EmployerHome(User user) {
+
+        public CandidateHome(User user) {
             InitializeComponent();
 
             WelcomeText.Text = "Welcome " + user.UserName;
         }
 
+        
         private void Logout_Click(object sender, RoutedEventArgs e) {
 
             MainWindow mw = new MainWindow();
 
             this.Close();
             mw.Show();
-
         }
     }
 }

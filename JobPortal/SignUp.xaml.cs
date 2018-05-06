@@ -54,7 +54,7 @@ namespace JobPortal {
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e) {
 
-            if (UserName.Text != "" && Password.ToString() != "") {
+            if (UserName.Text != "" && Password.Password.ToString() != "") {
 
                 if (!UserNameError) {
 
@@ -68,7 +68,7 @@ namespace JobPortal {
                     User newUser = new User() {
 
                         UserName = UserName.Text,
-                        Password = Password.ToString(),
+                        Password = Password.Password.ToString(),
                         UserType = userType
 
                     };
