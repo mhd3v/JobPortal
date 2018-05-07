@@ -49,6 +49,15 @@ namespace JobPortal {
 
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e) {
+
+            CandidateEditProfile cep = new CandidateEditProfile(user);
+
+            this.Close();
+            cep.Show();
+
+        }
+
        
     }
 }

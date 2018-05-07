@@ -38,6 +38,10 @@ namespace JobPortal {
             if (!alreadyPopulated)
                 populateComboxes();
 
+            Age.SelectedIndex = 0;
+            Experience.SelectedIndex = 0;
+            Gpa.SelectedIndex = 0;
+
             Requirements.Visibility = Visibility.Visible;
 
 
@@ -57,8 +61,6 @@ namespace JobPortal {
 
             for (double i = 2; i <= 4; i += 0.2) //adding 0.2 
                 Gpa.Items.Add(new ComboBoxItem(i + "+", i)); //adding display value, hidden value
-
-            
 
             for (double i = 1; i <= 10; i++) 
                 Experience.Items.Add(new ComboBoxItem(i + "+ years", i)); //adding display value, hidden value
@@ -122,6 +124,10 @@ namespace JobPortal {
 
             }
 
+            else {
+                MessageBox.Show("Listing title and description cannot be empty");
+            }
+
             
 
         }
@@ -139,7 +145,7 @@ namespace JobPortal {
     }
 
 
-    public class ComboBoxItem { //will use this class to store a value with each item
+    public class ComboBoxItem { //will use this class to store a value with each item, i.e. we're storing an object as an item
 
 
         string displayValue;

@@ -41,9 +41,6 @@
 
                 <Label>Experience Requirement:</Label>
                 <ComboBox Name="Experience">
-                    <!--<ComboBoxItem Content="1+ years" IsSelected="True"></ComboBoxItem>
-                    <ComboBoxItem Content="3+ years"></ComboBoxItem>
-                    <ComboBoxItem Content="5+ years"></ComboBoxItem>-->
                 </ComboBox>
                
 

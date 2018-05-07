@@ -69,6 +69,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CandidateEditProfile.xaml.cs">
+      <DependentUpon>CandidateEditProfile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CandidateHome.xaml.cs">
       <DependentUpon>CandidateHome.xaml</DependentUpon>
     </Compile>
@@ -89,6 +92,10 @@
     <Compile Include="ViewJobs.xaml.cs">
       <DependentUpon>ViewJobs.xaml</DependentUpon>
     </Compile>
+    <Page Include="CandidateEditProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CandidateHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
