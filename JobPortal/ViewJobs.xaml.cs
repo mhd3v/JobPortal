@@ -20,14 +20,42 @@ namespace JobPortal {
 
         JPDataClassesDataContext dc = new JPDataClassesDataContext();
 
-        public ViewJobs() {
+        User user;
+
+        public ViewJobs(User u) {
             InitializeComponent();
 
+            user = u;
+
             var res = from r in dc.Listings
+                      where r.OpenToAll == 1 || (u.Gpa >= r.GpaRequirement && u.Age >= r.AgeRequirement && u.Experience >= r.ExperienceRequirement)
                       select r;
 
-            dg.ItemsSource = res;
 
+            ListingsList.ItemsSource = res;
+
+        }
+
+        private void ListBoxSelectionChanged(object sender, SelectionChangedEventArgs e){
+
+            Listing d = (Listing)ListingsList.SelectedItem;
+
+            if(d.OpenToAll == 1){
+                RequirementsPanel.Visibility = Visibility.Hidden;
+            }
+            else {
+
+                RequirementsPanel.Visibility = Visibility.Visible;
+            }
+
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e) {
+
+            CandidateHome ch = new CandidateHome(user);
+
+            this.Close();
+            ch.Show();
         }
     }
 }

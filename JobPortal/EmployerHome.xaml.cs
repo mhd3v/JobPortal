@@ -28,7 +28,7 @@ namespace JobPortal {
             InitializeComponent();
 
             user = u;
-            WelcomeText.Text = "Welcome " + u.UserName;
+            WelcomeText.Text = "Welcome " + u.UserName +"!";
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e) {

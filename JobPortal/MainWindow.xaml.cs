@@ -79,7 +79,7 @@ namespace JobPortal {
 
             else {
 
-                if (UserName.Text == "" && Password.Password.ToString() != "")
+                if (UserName.Text == "" && Password.Password.ToString() == "")
                     MessageBox.Show("Enter username and password");
 
                 else if (UserName.Text == "")

@@ -97,7 +97,7 @@ namespace JobPortal {
                     }
 
                     else {
-                        MessageBox.Show("Selected all requirements");
+                        MessageBox.Show("Select all requirements");
                     }
 
                 }
@@ -124,13 +124,11 @@ namespace JobPortal {
 
             
 
-
-
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e) {
 
-            EmployerHome eh = new EmployerHome();
+            EmployerHome eh = new EmployerHome(user);
 
             this.Close();
             eh.Show();

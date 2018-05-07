@@ -17,14 +17,18 @@ namespace JobPortal {
     /// Interaction logic for CandidateHome.xaml
     /// </summary>
     public partial class CandidateHome : Window {
+        User user;
+
         public CandidateHome() {
             InitializeComponent();
         }
 
-        public CandidateHome(User user) {
+        public CandidateHome(User u) {
             InitializeComponent();
 
-            WelcomeText.Text = "Welcome " + user.UserName;
+            user = u;
+
+            WelcomeText.Text = "Welcome " + user.UserName + "!";
         }
 
         
@@ -38,7 +42,7 @@ namespace JobPortal {
 
         private void ViewJobs_Click(object sender, RoutedEventArgs e) {
 
-            ViewJobs vj = new ViewJobs();
+            ViewJobs vj = new ViewJobs(user);
 
             this.Close();
             vj.Show();

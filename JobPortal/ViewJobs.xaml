@@ -1,12 +1,55 @@
 ﻿<Window x:Class="JobPortal.ViewJobs"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ViewJobs" Height="500" Width="600">
+        Title="ViewJobs" Height="560" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         
-        <DataGrid Name="dg"> 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+       
+        <StackPanel>
+
+            <ListBox Name="ListingsList" Grid.Row="1" SelectionChanged="ListBoxSelectionChanged">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Name="ListLabel" Content="{Binding Path=ListingTitle}"></Label>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+            </ListBox>
+
+            <Button Name="Back" Margin="0 380 0 0" Width="40" Click="Back_Click">Back</Button>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="2">
             
-        </DataGrid>
+            <TextBlock TextAlignment="Center" FontSize="20" FontWeight="Bold" Text="{Binding ElementName=ListingsList, Path=SelectedItem.ListingTitle}"></TextBlock>
+
+            <StackPanel Margin="40">
+                 
+                <TextBlock TextAlignment="Left" Text="{Binding ElementName=ListingsList, Path=SelectedItem.User.UserName, StringFormat='Created By: {0}'}"></TextBlock>
+                <TextBlock TextAlignment="Left" Text="{Binding ElementName=ListingsList, Path=SelectedItem.ListedDate, StringFormat='Creation Date: {0}'}"></TextBlock>
+                <TextBlock TextAlignment="Left" Text="{Binding ElementName=ListingsList, Path=SelectedItem.ListingDescription, StringFormat='Description: {0}'}"></TextBlock>
+                
+                <StackPanel Name="RequirementsPanel" Visibility="Hidden">
+                    <Label FontWeight="Bold">Requirements:</Label>
+                    <TextBlock TextAlignment="Left" Text="{Binding ElementName=ListingsList, Path=SelectedItem.AgeRequirement, StringFormat='Age: {0}+'}"></TextBlock>
+                    <TextBlock TextAlignment="Left" Text="{Binding ElementName=ListingsList, Path=SelectedItem.ExperienceRequirement, StringFormat='Experience: {0}+'}"></TextBlock>
+                    <TextBlock TextAlignment="Left" Text="{Binding ElementName=ListingsList, Path=SelectedItem.GpaRequirement, StringFormat='GPA: {0}+'}"></TextBlock>
+                </StackPanel>
+                
+            </StackPanel>
+            
+            <Button Margin="0 250 0 0" Width="40">Apply</Button>
+            
+        </StackPanel>
+        
+        
+       
+        
         
     </Grid>
 </Window>
