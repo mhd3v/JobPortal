@@ -11,6 +11,7 @@
       <Column Name="ListingTitle" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="AgeRequirement" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Listing_JobApplication" Member="JobApplications" ThisKey="ListingId" OtherKey="ListingId" Type="JobApplication" />
       <Association Name="User_Listing" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
@@ -26,6 +27,7 @@
       <Association Name="User_Listing" Member="Listings" ThisKey="UserId" OtherKey="UserId" Type="Listing" />
       <Association Name="User_Message" Member="Messages" ThisKey="UserId" OtherKey="Sender" Type="Message" />
       <Association Name="User_Message1" Member="Messages1" ThisKey="UserId" OtherKey="Receiver" Type="Message" />
+      <Association Name="User_JobApplication" Member="JobApplications" ThisKey="UserId" OtherKey="Candidate" Type="JobApplication" />
     </Type>
   </Table>
   <Table Name="dbo.Message" Member="Messages">
@@ -37,6 +39,15 @@
       <Column Name="MessageTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="User_Message" Member="User" ThisKey="Sender" OtherKey="UserId" Type="User" IsForeignKey="true" />
       <Association Name="User_Message1" Member="User1" ThisKey="Receiver" OtherKey="UserId" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.JobApplication" Member="JobApplications">
+    <Type Name="JobApplication">
+      <Column Name="ApplicationId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Candidate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ListingId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Listing_JobApplication" Member="Listing" ThisKey="ListingId" OtherKey="ListingId" Type="Listing" IsForeignKey="true" />
+      <Association Name="User_JobApplication" Member="User" ThisKey="Candidate" OtherKey="UserId" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -39,6 +39,9 @@ namespace JobPortal
     partial void InsertMessage(Message instance);
     partial void UpdateMessage(Message instance);
     partial void DeleteMessage(Message instance);
+    partial void InsertJobApplication(JobApplication instance);
+    partial void UpdateJobApplication(JobApplication instance);
+    partial void DeleteJobApplication(JobApplication instance);
     #endregion
 		
 		public JPDataClassesDataContext() : 
@@ -94,6 +97,14 @@ namespace JobPortal
 				return this.GetTable<Message>();
 			}
 		}
+		
+		public System.Data.Linq.Table<JobApplication> JobApplications
+		{
+			get
+			{
+				return this.GetTable<JobApplication>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Listing")]
@@ -119,6 +130,8 @@ namespace JobPortal
 		private System.Nullable<double> _AgeRequirement;
 		
 		private int _UserId;
+		
+		private EntitySet<JobApplication> _JobApplications;
 		
 		private EntityRef<User> _User;
 		
@@ -148,6 +161,7 @@ namespace JobPortal
 		
 		public Listing()
 		{
+			this._JobApplications = new EntitySet<JobApplication>(new Action<JobApplication>(this.attach_JobApplications), new Action<JobApplication>(this.detach_JobApplications));
 			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
@@ -336,6 +350,19 @@ namespace JobPortal
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Listing_JobApplication", Storage="_JobApplications", ThisKey="ListingId", OtherKey="ListingId")]
+		public EntitySet<JobApplication> JobApplications
+		{
+			get
+			{
+				return this._JobApplications;
+			}
+			set
+			{
+				this._JobApplications.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Listing", Storage="_User", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
 		public User User
 		{
@@ -389,6 +416,18 @@ namespace JobPortal
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_JobApplications(JobApplication entity)
+		{
+			this.SendPropertyChanging();
+			entity.Listing = this;
+		}
+		
+		private void detach_JobApplications(JobApplication entity)
+		{
+			this.SendPropertyChanging();
+			entity.Listing = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
@@ -417,6 +456,8 @@ namespace JobPortal
 		
 		private EntitySet<Message> _Messages1;
 		
+		private EntitySet<JobApplication> _JobApplications;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -442,6 +483,7 @@ namespace JobPortal
 			this._Listings = new EntitySet<Listing>(new Action<Listing>(this.attach_Listings), new Action<Listing>(this.detach_Listings));
 			this._Messages = new EntitySet<Message>(new Action<Message>(this.attach_Messages), new Action<Message>(this.detach_Messages));
 			this._Messages1 = new EntitySet<Message>(new Action<Message>(this.attach_Messages1), new Action<Message>(this.detach_Messages1));
+			this._JobApplications = new EntitySet<JobApplication>(new Action<JobApplication>(this.attach_JobApplications), new Action<JobApplication>(this.detach_JobApplications));
 			OnCreated();
 		}
 		
@@ -624,6 +666,19 @@ namespace JobPortal
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_JobApplication", Storage="_JobApplications", ThisKey="UserId", OtherKey="Candidate")]
+		public EntitySet<JobApplication> JobApplications
+		{
+			get
+			{
+				return this._JobApplications;
+			}
+			set
+			{
+				this._JobApplications.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -678,6 +733,18 @@ namespace JobPortal
 		{
 			this.SendPropertyChanging();
 			entity.User1 = null;
+		}
+		
+		private void attach_JobApplications(JobApplication entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_JobApplications(JobApplication entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
 		}
 	}
 	
@@ -896,6 +963,198 @@ namespace JobPortal
 						this._Receiver = default(int);
 					}
 					this.SendPropertyChanged("User1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.JobApplication")]
+	public partial class JobApplication : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ApplicationId;
+		
+		private int _Candidate;
+		
+		private int _ListingId;
+		
+		private EntityRef<Listing> _Listing;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnApplicationIdChanging(int value);
+    partial void OnApplicationIdChanged();
+    partial void OnCandidateChanging(int value);
+    partial void OnCandidateChanged();
+    partial void OnListingIdChanging(int value);
+    partial void OnListingIdChanged();
+    #endregion
+		
+		public JobApplication()
+		{
+			this._Listing = default(EntityRef<Listing>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ApplicationId
+		{
+			get
+			{
+				return this._ApplicationId;
+			}
+			set
+			{
+				if ((this._ApplicationId != value))
+				{
+					this.OnApplicationIdChanging(value);
+					this.SendPropertyChanging();
+					this._ApplicationId = value;
+					this.SendPropertyChanged("ApplicationId");
+					this.OnApplicationIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Candidate", DbType="Int NOT NULL")]
+		public int Candidate
+		{
+			get
+			{
+				return this._Candidate;
+			}
+			set
+			{
+				if ((this._Candidate != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCandidateChanging(value);
+					this.SendPropertyChanging();
+					this._Candidate = value;
+					this.SendPropertyChanged("Candidate");
+					this.OnCandidateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListingId", DbType="Int NOT NULL")]
+		public int ListingId
+		{
+			get
+			{
+				return this._ListingId;
+			}
+			set
+			{
+				if ((this._ListingId != value))
+				{
+					if (this._Listing.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnListingIdChanging(value);
+					this.SendPropertyChanging();
+					this._ListingId = value;
+					this.SendPropertyChanged("ListingId");
+					this.OnListingIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Listing_JobApplication", Storage="_Listing", ThisKey="ListingId", OtherKey="ListingId", IsForeignKey=true)]
+		public Listing Listing
+		{
+			get
+			{
+				return this._Listing.Entity;
+			}
+			set
+			{
+				Listing previousValue = this._Listing.Entity;
+				if (((previousValue != value) 
+							|| (this._Listing.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Listing.Entity = null;
+						previousValue.JobApplications.Remove(this);
+					}
+					this._Listing.Entity = value;
+					if ((value != null))
+					{
+						value.JobApplications.Add(this);
+						this._ListingId = value.ListingId;
+					}
+					else
+					{
+						this._ListingId = default(int);
+					}
+					this.SendPropertyChanged("Listing");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_JobApplication", Storage="_User", ThisKey="Candidate", OtherKey="UserId", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.JobApplications.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.JobApplications.Add(this);
+						this._Candidate = value.UserId;
+					}
+					else
+					{
+						this._Candidate = default(int);
+					}
+					this.SendPropertyChanged("User");
 				}
 			}
 		}

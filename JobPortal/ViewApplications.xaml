@@ -1,0 +1,78 @@
+﻿<Window x:Class="JobPortal.ViewApplications"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ViewApplications" Height="400" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" ShowInTaskbar="False">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Background="Black" VerticalAlignment="Center" Grid.ColumnSpan="2">
+            <Label HorizontalAlignment="Center" Foreground="White" Content="Job Applications"/>
+        </StackPanel>
+
+        <Button Width="40" Height="20" HorizontalAlignment="Left" Content="Back" Click="Back_Click"/>
+
+
+        <StackPanel Name="Error" Grid.ColumnSpan="2" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden">
+            <Label FontStyle="Italic" FontSize="10">No job applications to show :(</Label>
+        </StackPanel>
+
+        <!--<DataGrid Name="dg" Grid.Row="2" Grid.ColumnSpan="2"></DataGrid>-->
+
+        <StackPanel Grid.Row="2" Name="SideBar">
+            
+            <Label HorizontalAlignment="Center" FontWeight="Bold">Candidates</Label>
+
+            <ListBox Name="CandidateList" Grid.Row="1" SelectionChanged="NewCandidateSelected">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Name="ListLabel" Content="{Binding Path=CandidateName}"></Label>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+            </ListBox>
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="2" Name="CandidateProfile">
+
+            <Label HorizontalAlignment="Center" FontWeight="Bold">Candidate Application</Label>
+
+            <!--CandidateName = ja.User.UserName,
+                          CandidateGPA = ja.User.Gpa,
+                          CandidateExperience = ja.User.Experience,
+                          CandidateAge = ja.User.Age,
+                          AppliedFor = ja.Listing.ListingTitle-->
+            
+            <StackPanel Margin="30">
+                <TextBlock FontStyle="Italic">Applied for:</TextBlock>
+                <TextBlock Margin="0 0 0 10" Name="cUserName" Text="{Binding ElementName=CandidateList ,Path=SelectedItem.AppliedFor}" FontWeight="Bold"></TextBlock>
+
+                <TextBlock FontStyle="Italic">Candidate Age:</TextBlock>
+                <TextBlock Margin="0 0 0 10" Name="cAge" Text="{Binding ElementName=CandidateList ,Path=SelectedItem.CandidateAge}" FontWeight="Bold"></TextBlock>
+
+                <TextBlock FontStyle="Italic">Candidate GPA:</TextBlock>
+                <TextBlock Margin="0 0 0 10" Name="cGpa" Text="{Binding ElementName=CandidateList ,Path=SelectedItem.CandidateGPA}" FontWeight="Bold"></TextBlock>
+
+                <TextBlock FontStyle="Italic">Candidate Experience:</TextBlock>
+                <TextBlock Name="cExp" Text="{Binding ElementName=CandidateList ,Path=SelectedItem.CandidateExperience}" FontWeight="Bold"></TextBlock>
+
+
+                <Button Margin="0 70 0 0" Width="100">Call for interview</Button>
+            </StackPanel>
+            
+            
+
+        </StackPanel>
+
+    </Grid>
+</Window>

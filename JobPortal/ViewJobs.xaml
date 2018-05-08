@@ -24,6 +24,8 @@
         </StackPanel>
         
         <StackPanel Grid.Row="2" Name="SideBar">
+            
+            <Label HorizontalAlignment="Center" FontWeight="Bold">Jobs</Label>
 
             <ListBox Name="ListingsList" SelectionChanged="ListBoxSelectionChanged">
 
@@ -38,6 +40,8 @@
         </StackPanel>
 
         <StackPanel Grid.Column="2" Grid.Row="2" Name="ListingBody">
+            
+            <Label HorizontalAlignment="Center" FontWeight="Bold">Description</Label>
             
             <TextBlock TextAlignment="Center" FontSize="20" FontWeight="Bold" Text="{Binding ElementName=ListingsList, Path=SelectedItem.ListingTitle}"></TextBlock>
 
@@ -56,13 +60,9 @@
                 
             </StackPanel>
             
-            <Button Margin="0 220 0 0" Width="40">Apply</Button>
+            <Button Margin="0 190 0 0" Width="40" Click="Button_Click">Apply</Button>
             
         </StackPanel>
-        
-        
-       
-        
         
     </Grid>
 </Window>

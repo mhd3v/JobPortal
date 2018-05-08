@@ -68,5 +68,33 @@ namespace JobPortal {
             this.Close();
             ch.Show();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+
+            Listing d = (Listing)ListingsList.SelectedItem;
+
+            var res = from j in dc.JobApplications
+                      where j.ListingId == d.ListingId && j.Candidate == user.UserId
+                      select j;
+
+            if (res.Count() > 0) {
+
+                MessageBox.Show("You've already applied for this job");
+            }
+
+            else {
+
+                JobApplication newJA = new JobApplication() {
+                    Candidate = user.UserId,
+                    ListingId = d.ListingId
+
+                };
+
+                dc.JobApplications.InsertOnSubmit(newJA);
+                dc.SubmitChanges();
+                MessageBox.Show("Successfully applied to job!");
+            }
+
+        }
     }
 }

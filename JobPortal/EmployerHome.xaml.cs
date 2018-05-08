@@ -55,5 +55,15 @@ namespace JobPortal {
             this.Close();
             vm.Show();
         }
+
+
+        private void ViewApplications_Click(object sender, RoutedEventArgs e) {
+
+            ViewApplications va = new ViewApplications(user);
+
+            this.Close();
+            va.Show();
+
+        }
     }
 }

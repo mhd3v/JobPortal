@@ -118,7 +118,10 @@ namespace JobPortal {
                     dc.Listings.InsertOnSubmit(listing);
                     dc.SubmitChanges();
 
-                    MessageBox.Show("Listing Created");
+                    EmployerHome eh = new EmployerHome(user);
+
+                    this.Close();
+                    eh.Show();
 
                 }
 
