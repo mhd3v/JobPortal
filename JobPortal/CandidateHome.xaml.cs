@@ -28,7 +28,7 @@ namespace JobPortal {
 
             user = u;
 
-            WelcomeText.Text = "Welcome " + user.UserName + "!";
+            WelcomeText.Content = "Welcome " + user.UserName + "!";
         }
 
         
@@ -56,6 +56,13 @@ namespace JobPortal {
             this.Close();
             cep.Show();
 
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e) {
+            ViewMessages vm = new ViewMessages(user);
+
+            this.Close();
+            vm.Show();
         }
 
        

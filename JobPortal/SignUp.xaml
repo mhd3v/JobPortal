@@ -4,29 +4,39 @@
         Title="SignUp" Height="350" Width="600" WindowStartupLocation="CenterScreen">
     <Grid>
         
-        <StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+           
+
+                <Label FontWeight="Bold">SignUp As:</Label>
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton Name="Candidate" IsChecked="True">Candidate</RadioButton>
+                    <RadioButton Name="Employer" Margin="20 0 0 0">Employer</RadioButton>
+                </StackPanel>
+
+
+                <StackPanel  Margin=" 0 20 0 0">
+                    <Label FontWeight="Bold">UserName:</Label>
+                    <TextBox HorizontalAlignment="Left" Name="UserName" TextChanged="CheckUserName" Width="270"></TextBox>
+                    <Label Name="UsernameError" Visibility="Hidden">User with the same username exists!</Label>
+                </StackPanel>
+
+            <StackPanel Margin=" 0 0 0 10">
+                    <Label FontWeight="Bold">Password:</Label>
+                    <PasswordBox HorizontalAlignment="Left" Name="Password" Width="270"></PasswordBox>
+            </StackPanel>
             
-            <Label>SignUp As:</Label>
-            <StackPanel Orientation="Horizontal">
-                <RadioButton Name="Candidate" IsChecked="True">Candidate</RadioButton>
-                <RadioButton Name="Employer" Margin="20 0 0 0">Employer</RadioButton>
+            <StackPanel>
+                <Label Margin="0 0 36 0" FontWeight="Bold">Confirm Password:</Label>
+                <PasswordBox HorizontalAlignment="Left" Name="CPassword" Width="270"></PasswordBox>
             </StackPanel>
 
-            
-            <StackPanel Orientation="Horizontal" Margin=" 0 20 0 10">
-                <Label Margin="0 0 30 0">UserName:</Label>
-                <TextBox Name="UserName" TextChanged="CheckUserName" Width="120"></TextBox>
-                <Label Name="UsernameError" Visibility="Hidden">User with the same username exists!</Label>
+
+            <StackPanel Orientation="Horizontal" Margin="0 50 0 0" HorizontalAlignment="Center">
+                <Button Name="Cancel" Width="60" Margin="0 0 10 0" Click="Cancel_Click">Cancel</Button>
+                <Button Name="SignUpButton" Click="SignUpButton_Click" Width="60">Sign Up</Button>
             </StackPanel>
-            
-            <StackPanel Orientation="Horizontal">
-                <Label Margin="0 0 36 0">Password:</Label>
-                <PasswordBox Name="Password" Width="120"></PasswordBox>
-            </StackPanel>
-            
-            
-            
-            <Button Name="SignUpButton" Click="SignUpButton_Click" Margin="0 100 0 0" Width="60">Sign Up</Button>
+               
+
 
         </StackPanel>
         

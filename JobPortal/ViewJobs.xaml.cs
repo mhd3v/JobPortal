@@ -32,6 +32,17 @@ namespace JobPortal {
                       select r;
 
 
+            if (res.Count() > 0) {
+                ListingsList.ItemsSource = res;
+                ListingsList.SelectedIndex = 0;
+            }
+
+            else {
+                ListingBody.Visibility = Visibility.Hidden;
+                SideBar.Visibility = Visibility.Hidden;
+                Error.Visibility = Visibility.Visible;
+            }
+
             ListingsList.ItemsSource = res;
 
         }

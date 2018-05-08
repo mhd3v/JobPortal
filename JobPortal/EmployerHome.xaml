@@ -5,15 +5,23 @@
     
     <Grid>
 
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            
-            <TextBlock Name="WelcomeText" TextAlignment="Center"></TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+        </Grid.RowDefinitions>
 
+        <StackPanel Grid.ColumnSpan="2" Background="Black" VerticalAlignment="Center">
+            <Label Name="WelcomeText" HorizontalAlignment="Center" Foreground="White"/>
+        </StackPanel>
+
+        <Button Width="50" Height="20" HorizontalAlignment="Left" Content="Logout" Click="Logout_Click" FontStyle="Italic"/>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2">
+            
             <StackPanel Width="150" >
-                <Button Margin="0 30 0 0">View Messages</Button>
+                <Button Margin="0 30 0 0" Click="Button_Click">View Messages</Button>
                 <Button Margin="0 20 0 0">View Applications</Button>
                 <Button Margin="0 20 0 0" Name="CreateJobListing" Click="CreateJobListing_Click">Create Job Listing</Button>
-                <Button Margin="0 20 0 0" Width="50" Name="Logout" Click="Logout_Click">Logout</Button>
             </StackPanel>
 
         </StackPanel>

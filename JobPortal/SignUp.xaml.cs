@@ -51,47 +51,61 @@ namespace JobPortal {
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e) {
 
-            if (UserName.Text != "" && Password.Password.ToString() != "") {
+            if (UserName.Text != "" && Password.Password.ToString() != "" && CPassword.Password.ToString() != "") {
 
-                if (!UserNameError) {
+                if (Password.Password.ToString() == CPassword.Password.ToString()) {
 
-                    String userType;
+                    if (!UserNameError) {
 
-                    if (Employer.IsChecked == true)
-                        userType = "employer";
-                    else
-                        userType = "candidate";
+                        String userType;
 
-                    User newUser = new User() {
+                        if (Employer.IsChecked == true)
+                            userType = "employer";
+                        else
+                            userType = "candidate";
 
-                        UserName = UserName.Text,
-                        Password = Password.Password.ToString(),
-                        UserType = userType
+                        User newUser = new User() {
 
-                    };
+                            UserName = UserName.Text,
+                            Password = Password.Password.ToString(),
+                            UserType = userType
 
-                    dc.Users.InsertOnSubmit(newUser);
-                    dc.SubmitChanges();
+                        };
 
-                    MainWindow mw = new MainWindow();
+                        dc.Users.InsertOnSubmit(newUser);
+                        dc.SubmitChanges();
 
-                    this.Close();
-                    mw.Show();
+                        MainWindow mw = new MainWindow();
+
+                        this.Close();
+                        mw.Show();
+
+                    }
+
+                    else {
+                        MessageBox.Show("Username taken!");
+                    }
 
                 }
 
                 else {
-                    MessageBox.Show("Username taken!");
+                    MessageBox.Show("Passwords don't match");
                 }
-
                 
 
             }
 
             else{
-                MessageBox.Show("Fill both fields");
+                MessageBox.Show("Fill all fields");
             }
 
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e) {
+            MainWindow mw = new MainWindow();
+
+            this.Close();
+            mw.Show();
         }
     }
 }

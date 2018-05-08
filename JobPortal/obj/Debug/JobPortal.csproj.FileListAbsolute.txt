@@ -26,3 +26,5 @@ C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\obj\Deb
 C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\obj\Debug\ViewJobs.g.cs
 C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\obj\Debug\CandidateEditProfile.baml
 C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\obj\Debug\CandidateEditProfile.g.cs
+C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\obj\Debug\ViewMessages.baml
+C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\obj\Debug\ViewMessages.g.cs

@@ -1,0 +1,65 @@
+﻿<Window x:Class="JobPortal.ViewMessages"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ViewMessages" Height="400" Width="600" WindowStartupLocation="CenterScreen">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+        </Grid.RowDefinitions>
+                
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+
+        
+        <StackPanel Grid.ColumnSpan="2" Background="Black" VerticalAlignment="Center">
+            <Label HorizontalAlignment="Center" Foreground="White" Content="Messages"/>
+        </StackPanel>
+
+        <Button Width="40" Height="20" HorizontalAlignment="Left" Content="Back" Click="Back_Click"/>
+
+        <StackPanel Name="Error" Grid.ColumnSpan="2" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden">
+            <Label FontStyle="Italic" FontSize="10">No messages to show :(</Label>
+        </StackPanel>
+
+
+
+        <StackPanel Grid.Row="2" Name="SideBar">
+            
+            <ListBox Name="SendersList" Grid.Row="1" SelectionChanged="NewSenderSelected" >
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Name="ListLabel" Content="{Binding Path=SenderName}"></Label>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+            </ListBox>
+            
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="2" Name="ListingBody">
+
+            <ListBox Name="Messages">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        
+                        <StackPanel>
+                            <Label Name="Message" Content="{Binding Path=MessageBody}"></Label>
+                            <Label Name="MessageTime" Content="{Binding Path=MessageTime}" FontStyle="Italic" FontSize="8"></Label>
+                        </StackPanel>
+                        
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+            </ListBox>
+
+        </StackPanel>
+        
+    </Grid>
+</Window>

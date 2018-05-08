@@ -92,6 +92,9 @@
     <Compile Include="ViewJobs.xaml.cs">
       <DependentUpon>ViewJobs.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewMessages.xaml.cs">
+      <DependentUpon>ViewMessages.xaml</DependentUpon>
+    </Compile>
     <Page Include="CandidateEditProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -125,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewJobs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewMessages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
