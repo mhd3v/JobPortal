@@ -32,8 +32,8 @@ namespace JobPortal {
 
             var res = from ja in dc.JobApplications
                       where ja.Listing.UserId == user.UserId
-                      select new {
-                      
+                      select new Candidate{
+                          CandidateId = ja.Candidate,
                           CandidateName = ja.User.UserName,
                           CandidateGPA = ja.User.Gpa,
                           CandidateExperience = ja.User.Experience,
@@ -68,5 +68,29 @@ namespace JobPortal {
         private void NewCandidateSelected(object sender, SelectionChangedEventArgs e) {
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+
+            Candidate selectedItem = (Candidate)CandidateList.SelectedItem;
+
+            SendMessage sm = new SendMessage("You've been called for an interview by "+ user.UserName ,user, selectedItem.CandidateId);
+
+            this.Close();
+            sm.Show();
+
+        }
+
     }
+
+    public class Candidate {
+        public int CandidateId { get; set; }
+        public string CandidateName { get; set; }
+        public double? CandidateGPA { get; set; }
+        public double? CandidateExperience { get; set; }
+        public double? CandidateAge { get; set; }
+        public string AppliedFor { get; set; }
+
+    }
+
+    
 }

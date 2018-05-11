@@ -96,5 +96,18 @@ namespace JobPortal {
             }
 
         }
+
+        private void SendMessage_Click(object sender, RoutedEventArgs e) {
+
+            Listing d = (Listing)ListingsList.SelectedItem;
+
+            SendMessage sm = new SendMessage("", user, d.UserId);
+
+            this.Close();
+
+            sm.Show();
+
+
+        }
     }
 }

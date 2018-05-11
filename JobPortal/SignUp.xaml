@@ -1,44 +1,59 @@
 ﻿<Window x:Class="JobPortal.SignUp"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SignUp" Height="350" Width="600" WindowStartupLocation="CenterScreen">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         Background="{DynamicResource MaterialDesignPaper}"
+         FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="SignUp" Height="550" Width="700" WindowStartupLocation="CenterScreen">
     <Grid>
         
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-           
 
-                <Label FontWeight="Bold">SignUp As:</Label>
-                <StackPanel Orientation="Horizontal">
-                    <RadioButton Name="Candidate" IsChecked="True">Candidate</RadioButton>
-                    <RadioButton Name="Employer" Margin="20 0 0 0">Employer</RadioButton>
+        <materialDesign:Card Padding="32" Margin="16,16,16,0" Grid.ColumnSpan="2">
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+
+                <TextBlock FontWeight="Bold">SignUp As:</TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                    <RadioButton Name="Candidate" IsChecked="True" Background="Black">Candidate</RadioButton>
+                    <RadioButton Name="Employer" Margin="20 0 0 0" Background="Black">Employer</RadioButton>
                 </StackPanel>
 
 
                 <StackPanel  Margin=" 0 20 0 0">
-                    <Label FontWeight="Bold">UserName:</Label>
+                    <TextBlock FontWeight="Bold">UserName:</TextBlock>
                     <TextBox HorizontalAlignment="Left" Name="UserName" TextChanged="CheckUserName" Width="270"></TextBox>
                     <Label Name="UsernameError" Visibility="Hidden">User with the same username exists!</Label>
                 </StackPanel>
 
-            <StackPanel Margin=" 0 0 0 10">
-                    <Label FontWeight="Bold">Password:</Label>
+                <StackPanel Margin=" 0 0 0 10">
+                    <TextBlock FontWeight="Bold">Password:</TextBlock>
                     <PasswordBox HorizontalAlignment="Left" Name="Password" Width="270"></PasswordBox>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Margin="0 0 36 0" FontWeight="Bold">Confirm Password:</TextBlock>
+                    <PasswordBox HorizontalAlignment="Left" Name="CPassword" Width="270"></PasswordBox>
+                </StackPanel>
+
+
+                <StackPanel Orientation="Horizontal" Margin="0 50 0 0" HorizontalAlignment="Center">
+                    <Button Name="Cancel" Width="80" Margin="0 0 10 0" Click="Cancel_Click" Background="#FF302D2D" BorderBrush="#FF302D2D">Cancel</Button>
+                    <Button Name="SignUpButton" Click="SignUpButton_Click" Width="90" Background="#FF302D2D" BorderBrush="#FF302D2D">Sign Up</Button>
+                </StackPanel>
+
+
+
             </StackPanel>
-            
-            <StackPanel>
-                <Label Margin="0 0 36 0" FontWeight="Bold">Confirm Password:</Label>
-                <PasswordBox HorizontalAlignment="Left" Name="CPassword" Width="270"></PasswordBox>
-            </StackPanel>
+
+        </materialDesign:Card>
 
 
-            <StackPanel Orientation="Horizontal" Margin="0 50 0 0" HorizontalAlignment="Center">
-                <Button Name="Cancel" Width="60" Margin="0 0 10 0" Click="Cancel_Click">Cancel</Button>
-                <Button Name="SignUpButton" Click="SignUpButton_Click" Width="60">Sign Up</Button>
-            </StackPanel>
-               
 
-
-        </StackPanel>
-        
     </Grid>
 </Window>

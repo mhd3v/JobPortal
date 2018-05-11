@@ -36,12 +36,12 @@ namespace JobPortal
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
-    partial void InsertMessage(Message instance);
-    partial void UpdateMessage(Message instance);
-    partial void DeleteMessage(Message instance);
     partial void InsertJobApplication(JobApplication instance);
     partial void UpdateJobApplication(JobApplication instance);
     partial void DeleteJobApplication(JobApplication instance);
+    partial void InsertMessage(Message instance);
+    partial void UpdateMessage(Message instance);
+    partial void DeleteMessage(Message instance);
     #endregion
 		
 		public JPDataClassesDataContext() : 
@@ -90,19 +90,19 @@ namespace JobPortal
 			}
 		}
 		
-		public System.Data.Linq.Table<Message> Messages
-		{
-			get
-			{
-				return this.GetTable<Message>();
-			}
-		}
-		
 		public System.Data.Linq.Table<JobApplication> JobApplications
 		{
 			get
 			{
 				return this.GetTable<JobApplication>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Message> Messages
+		{
+			get
+			{
+				return this.GetTable<Message>();
 			}
 		}
 	}
@@ -452,11 +452,11 @@ namespace JobPortal
 		
 		private EntitySet<Listing> _Listings;
 		
+		private EntitySet<JobApplication> _JobApplications;
+		
 		private EntitySet<Message> _Messages;
 		
 		private EntitySet<Message> _Messages1;
-		
-		private EntitySet<JobApplication> _JobApplications;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -481,9 +481,9 @@ namespace JobPortal
 		public User()
 		{
 			this._Listings = new EntitySet<Listing>(new Action<Listing>(this.attach_Listings), new Action<Listing>(this.detach_Listings));
+			this._JobApplications = new EntitySet<JobApplication>(new Action<JobApplication>(this.attach_JobApplications), new Action<JobApplication>(this.detach_JobApplications));
 			this._Messages = new EntitySet<Message>(new Action<Message>(this.attach_Messages), new Action<Message>(this.detach_Messages));
 			this._Messages1 = new EntitySet<Message>(new Action<Message>(this.attach_Messages1), new Action<Message>(this.detach_Messages1));
-			this._JobApplications = new EntitySet<JobApplication>(new Action<JobApplication>(this.attach_JobApplications), new Action<JobApplication>(this.detach_JobApplications));
 			OnCreated();
 		}
 		
@@ -640,6 +640,19 @@ namespace JobPortal
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_JobApplication", Storage="_JobApplications", ThisKey="UserId", OtherKey="Candidate")]
+		public EntitySet<JobApplication> JobApplications
+		{
+			get
+			{
+				return this._JobApplications;
+			}
+			set
+			{
+				this._JobApplications.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Message", Storage="_Messages", ThisKey="UserId", OtherKey="Sender")]
 		public EntitySet<Message> Messages
 		{
@@ -663,19 +676,6 @@ namespace JobPortal
 			set
 			{
 				this._Messages1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_JobApplication", Storage="_JobApplications", ThisKey="UserId", OtherKey="Candidate")]
-		public EntitySet<JobApplication> JobApplications
-		{
-			get
-			{
-				return this._JobApplications;
-			}
-			set
-			{
-				this._JobApplications.Assign(value);
 			}
 		}
 		
@@ -711,6 +711,18 @@ namespace JobPortal
 			entity.User = null;
 		}
 		
+		private void attach_JobApplications(JobApplication entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_JobApplications(JobApplication entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
 		private void attach_Messages(Message entity)
 		{
 			this.SendPropertyChanging();
@@ -733,258 +745,6 @@ namespace JobPortal
 		{
 			this.SendPropertyChanging();
 			entity.User1 = null;
-		}
-		
-		private void attach_JobApplications(JobApplication entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_JobApplications(JobApplication entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Message")]
-	public partial class Message : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _MessageId;
-		
-		private int _Sender;
-		
-		private int _Receiver;
-		
-		private string _MessageBody;
-		
-		private System.DateTime _MessageTime;
-		
-		private EntityRef<User> _User;
-		
-		private EntityRef<User> _User1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnMessageIdChanging(int value);
-    partial void OnMessageIdChanged();
-    partial void OnSenderChanging(int value);
-    partial void OnSenderChanged();
-    partial void OnReceiverChanging(int value);
-    partial void OnReceiverChanged();
-    partial void OnMessageBodyChanging(string value);
-    partial void OnMessageBodyChanged();
-    partial void OnMessageTimeChanging(System.DateTime value);
-    partial void OnMessageTimeChanged();
-    #endregion
-		
-		public Message()
-		{
-			this._User = default(EntityRef<User>);
-			this._User1 = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MessageId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MessageId
-		{
-			get
-			{
-				return this._MessageId;
-			}
-			set
-			{
-				if ((this._MessageId != value))
-				{
-					this.OnMessageIdChanging(value);
-					this.SendPropertyChanging();
-					this._MessageId = value;
-					this.SendPropertyChanged("MessageId");
-					this.OnMessageIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sender", DbType="Int NOT NULL")]
-		public int Sender
-		{
-			get
-			{
-				return this._Sender;
-			}
-			set
-			{
-				if ((this._Sender != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnSenderChanging(value);
-					this.SendPropertyChanging();
-					this._Sender = value;
-					this.SendPropertyChanged("Sender");
-					this.OnSenderChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Receiver", DbType="Int NOT NULL")]
-		public int Receiver
-		{
-			get
-			{
-				return this._Receiver;
-			}
-			set
-			{
-				if ((this._Receiver != value))
-				{
-					if (this._User1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnReceiverChanging(value);
-					this.SendPropertyChanging();
-					this._Receiver = value;
-					this.SendPropertyChanged("Receiver");
-					this.OnReceiverChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MessageBody", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string MessageBody
-		{
-			get
-			{
-				return this._MessageBody;
-			}
-			set
-			{
-				if ((this._MessageBody != value))
-				{
-					this.OnMessageBodyChanging(value);
-					this.SendPropertyChanging();
-					this._MessageBody = value;
-					this.SendPropertyChanged("MessageBody");
-					this.OnMessageBodyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MessageTime", DbType="DateTime NOT NULL")]
-		public System.DateTime MessageTime
-		{
-			get
-			{
-				return this._MessageTime;
-			}
-			set
-			{
-				if ((this._MessageTime != value))
-				{
-					this.OnMessageTimeChanging(value);
-					this.SendPropertyChanging();
-					this._MessageTime = value;
-					this.SendPropertyChanged("MessageTime");
-					this.OnMessageTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Message", Storage="_User", ThisKey="Sender", OtherKey="UserId", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Messages.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Messages.Add(this);
-						this._Sender = value.UserId;
-					}
-					else
-					{
-						this._Sender = default(int);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Message1", Storage="_User1", ThisKey="Receiver", OtherKey="UserId", IsForeignKey=true)]
-		public User User1
-		{
-			get
-			{
-				return this._User1.Entity;
-			}
-			set
-			{
-				User previousValue = this._User1.Entity;
-				if (((previousValue != value) 
-							|| (this._User1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User1.Entity = null;
-						previousValue.Messages1.Remove(this);
-					}
-					this._User1.Entity = value;
-					if ((value != null))
-					{
-						value.Messages1.Add(this);
-						this._Receiver = value.UserId;
-					}
-					else
-					{
-						this._Receiver = default(int);
-					}
-					this.SendPropertyChanged("User1");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -1155,6 +915,270 @@ namespace JobPortal
 						this._Candidate = default(int);
 					}
 					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Message")]
+	public partial class Message : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _MessageId;
+		
+		private int _Sender;
+		
+		private int _Receiver;
+		
+		private string _MessageBody;
+		
+		private System.DateTime _MessageTime;
+		
+		private string _MessageTitle;
+		
+		private EntityRef<User> _User;
+		
+		private EntityRef<User> _User1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMessageIdChanging(int value);
+    partial void OnMessageIdChanged();
+    partial void OnSenderChanging(int value);
+    partial void OnSenderChanged();
+    partial void OnReceiverChanging(int value);
+    partial void OnReceiverChanged();
+    partial void OnMessageBodyChanging(string value);
+    partial void OnMessageBodyChanged();
+    partial void OnMessageTimeChanging(System.DateTime value);
+    partial void OnMessageTimeChanged();
+    partial void OnMessageTitleChanging(string value);
+    partial void OnMessageTitleChanged();
+    #endregion
+		
+		public Message()
+		{
+			this._User = default(EntityRef<User>);
+			this._User1 = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MessageId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int MessageId
+		{
+			get
+			{
+				return this._MessageId;
+			}
+			set
+			{
+				if ((this._MessageId != value))
+				{
+					this.OnMessageIdChanging(value);
+					this.SendPropertyChanging();
+					this._MessageId = value;
+					this.SendPropertyChanged("MessageId");
+					this.OnMessageIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sender", DbType="Int NOT NULL")]
+		public int Sender
+		{
+			get
+			{
+				return this._Sender;
+			}
+			set
+			{
+				if ((this._Sender != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSenderChanging(value);
+					this.SendPropertyChanging();
+					this._Sender = value;
+					this.SendPropertyChanged("Sender");
+					this.OnSenderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Receiver", DbType="Int NOT NULL")]
+		public int Receiver
+		{
+			get
+			{
+				return this._Receiver;
+			}
+			set
+			{
+				if ((this._Receiver != value))
+				{
+					if (this._User1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnReceiverChanging(value);
+					this.SendPropertyChanging();
+					this._Receiver = value;
+					this.SendPropertyChanged("Receiver");
+					this.OnReceiverChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MessageBody", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string MessageBody
+		{
+			get
+			{
+				return this._MessageBody;
+			}
+			set
+			{
+				if ((this._MessageBody != value))
+				{
+					this.OnMessageBodyChanging(value);
+					this.SendPropertyChanging();
+					this._MessageBody = value;
+					this.SendPropertyChanged("MessageBody");
+					this.OnMessageBodyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MessageTime", DbType="DateTime NOT NULL")]
+		public System.DateTime MessageTime
+		{
+			get
+			{
+				return this._MessageTime;
+			}
+			set
+			{
+				if ((this._MessageTime != value))
+				{
+					this.OnMessageTimeChanging(value);
+					this.SendPropertyChanging();
+					this._MessageTime = value;
+					this.SendPropertyChanged("MessageTime");
+					this.OnMessageTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MessageTitle", DbType="NVarChar(MAX)")]
+		public string MessageTitle
+		{
+			get
+			{
+				return this._MessageTitle;
+			}
+			set
+			{
+				if ((this._MessageTitle != value))
+				{
+					this.OnMessageTitleChanging(value);
+					this.SendPropertyChanging();
+					this._MessageTitle = value;
+					this.SendPropertyChanged("MessageTitle");
+					this.OnMessageTitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Message", Storage="_User", ThisKey="Sender", OtherKey="UserId", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Messages.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Messages.Add(this);
+						this._Sender = value.UserId;
+					}
+					else
+					{
+						this._Sender = default(int);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Message1", Storage="_User1", ThisKey="Receiver", OtherKey="UserId", IsForeignKey=true)]
+		public User User1
+		{
+			get
+			{
+				return this._User1.Entity;
+			}
+			set
+			{
+				User previousValue = this._User1.Entity;
+				if (((previousValue != value) 
+							|| (this._User1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User1.Entity = null;
+						previousValue.Messages1.Remove(this);
+					}
+					this._User1.Entity = value;
+					if ((value != null))
+					{
+						value.Messages1.Add(this);
+						this._Receiver = value.UserId;
+					}
+					else
+					{
+						this._Receiver = default(int);
+					}
+					this.SendPropertyChanged("User1");
 				}
 			}
 		}

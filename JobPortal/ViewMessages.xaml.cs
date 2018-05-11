@@ -29,15 +29,17 @@ namespace JobPortal {
         public ViewMessages(User u) {
             InitializeComponent();
 
-
             user = u;
 
             var senders = (from m in dc.Messages
                           where m.Receiver == user.UserId
+                          orderby m.MessageTime ascending
                           select new Sender{
                               SenderName = m.User.UserName,
                               SenderId = m.User.UserId
                           }).Distinct();
+
+            
 
 
             if (senders.Count() > 0) {
@@ -50,8 +52,8 @@ namespace JobPortal {
                 SideBar.Visibility = Visibility.Hidden;
                 Error.Visibility = Visibility.Visible;
             }
-           
 
+            
 
         }
 
@@ -60,12 +62,15 @@ namespace JobPortal {
             Sender s = (Sender)SendersList.SelectedItem;
 
             var res1 = from n in dc.Messages
-                       where s.SenderId == n.Sender && user.UserId == n.Receiver
+                       where ( n.Sender == s.SenderId && n.Receiver == user.UserId) || (n.Sender == user.UserId && n.Receiver == s.SenderId)
+                       orderby n.MessageTime descending
                        select n;
 
             Messages.ItemsSource = res1;
 
         }
+
+       
 
         private void Back_Click(object sender, RoutedEventArgs e) {
             
@@ -93,4 +98,7 @@ namespace JobPortal {
         public string SenderName { get; set; }
         public int SenderId { get; set; }
     }
+
+    
+
 }
