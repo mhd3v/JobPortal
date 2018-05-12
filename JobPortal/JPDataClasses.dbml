@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="JPDatabase" Class="JPDataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\JPDatabase.mdf;Integrated Security=True" SettingsObjectName="JobPortal.Properties.Settings" SettingsPropertyName="JPDatabaseConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Listing" Member="Listings">
+    <Type Name="Listing">
+      <Column Name="ListingId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ListingDescription" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ListedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="GpaRequirement" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ExperienceRequirement" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="OpenToAll" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ListingTitle" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="AgeRequirement" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Listing_JobApplication" Member="JobApplications" ThisKey="ListingId" OtherKey="ListingId" Type="JobApplication" />
+      <Association Name="User_Listing" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Gpa" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Age" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Experience" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="User_Listing" Member="Listings" ThisKey="UserId" OtherKey="UserId" Type="Listing" />
+      <Association Name="User_JobApplication" Member="JobApplications" ThisKey="UserId" OtherKey="Candidate" Type="JobApplication" />
+      <Association Name="User_Message" Member="Messages" ThisKey="UserId" OtherKey="Sender" Type="Message" />
+      <Association Name="User_Message1" Member="Messages1" ThisKey="UserId" OtherKey="Receiver" Type="Message" />
+    </Type>
+  </Table>
+  <Table Name="dbo.JobApplication" Member="JobApplications">
+    <Type Name="JobApplication">
+      <Column Name="ApplicationId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Candidate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ListingId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Listing_JobApplication" Member="Listing" ThisKey="ListingId" OtherKey="ListingId" Type="Listing" IsForeignKey="true" />
+      <Association Name="User_JobApplication" Member="User" ThisKey="Candidate" OtherKey="UserId" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Message" Member="Messages">
+    <Type Name="Message">
+      <Column Name="MessageId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Sender" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Receiver" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MessageBody" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="MessageTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="MessageTitle" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="User_Message" Member="User" ThisKey="Sender" OtherKey="UserId" Type="User" IsForeignKey="true" />
+      <Association Name="User_Message1" Member="User1" ThisKey="Receiver" OtherKey="UserId" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

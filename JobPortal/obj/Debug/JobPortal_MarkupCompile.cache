@@ -1,0 +1,20 @@
+﻿JobPortal
+
+
+winexe
+C#
+.cs
+C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\obj\Debug\
+JobPortal
+none
+false
+DEBUG;TRACE
+C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\App.xaml
+101761839711
+2103738828
+15-532273525
+15-537386751
+CandidateEditProfile.xaml;CandidateHome.xaml;CreateJobListing.xaml;EmployerHome.xaml;MainWindow.xaml;SendMessage.xaml;SignUp.xaml;ViewApplications.xaml;ViewJobs.xaml;ViewMessages.xaml;
+
+False
+

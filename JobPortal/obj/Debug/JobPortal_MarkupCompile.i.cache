@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-c:\users\mahad\documents\visual studio 2013\Projects\JobPortal\JobPortal\obj\Debug\
+C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\obj\Debug\
 JobPortal
 none
 false
 DEBUG;TRACE
-c:\users\mahad\documents\visual studio 2013\Projects\JobPortal\JobPortal\App.xaml
-11151548125
-
-91146744603
-12-1401562060
-MainWindow.xaml;
+C:\Users\Mahad\Documents\Visual Studio 2013\Projects\JobPortal\JobPortal\App.xaml
+101761839711
+2103738828
+19-1662749716
+15-537386751
+CandidateEditProfile.xaml;CandidateHome.xaml;CreateJobListing.xaml;EmployerHome.xaml;MainWindow.xaml;SendMessage.xaml;SignUp.xaml;ViewApplications.xaml;ViewJobs.xaml;ViewMessages.xaml;
 
 False
 
